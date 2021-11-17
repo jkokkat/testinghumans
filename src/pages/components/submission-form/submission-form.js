@@ -33,7 +33,6 @@ export default class SubmissionForm extends Component {
                 emailError : (re.test(this.state.email) ? '' : 'Please enter a valid email address'),
                 descriptionError : (this.state.description.length < 1 ? 'Please enter description!':'')
 
-
         }});
         console.log(this.state.errors)
     }
@@ -81,7 +80,14 @@ export default class SubmissionForm extends Component {
             <div id="submission">
                 <p id="intro">{this.props.intro}</p>
 
-                <form name="form" method="post" id="text-fields" onSubmit={this.dontEnter} netlify-honeypot="bot-field">
+                <form name="form" method="post" id="text-fields" onSubmit={this.dontEnter} data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="bot-field" />
+                    <input type="hidden" name="form-name" value="form"/>
+                    <p hidden>
+                    <label>
+                     Don’t fill this out: <input name="bot-field" onChange={this.handleChange} />
+                    </label>
+                     </p>
                     <div id="spinner" style={{ float: "right" }}>
                         <img
                             id="picture"
@@ -150,7 +156,7 @@ export default class SubmissionForm extends Component {
                     </li>
                     <div style ={{fontSize:11, color:"red"}}>{this.state.errors.checkboxError}</div>
                     <br style={{ lineHeight: "2" }} />
-                    <div data-netlify-recaptcha="true"></div>
+                    {/* <div data-netlify-recaptcha="true"></div> */}
                     <button id="submit-button" input type="submit" onClick = {this.onClickSubmit}>SUBMIT</button>
                 </form>
             </div>
