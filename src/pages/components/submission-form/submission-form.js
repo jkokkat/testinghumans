@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import './submission-form.css';
 
+function encode(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+  
 export default class SubmissionForm extends Component {
     constructor(props) {
         super()
@@ -74,13 +80,25 @@ export default class SubmissionForm extends Component {
         }
 
     dontEnter(e) { e.preventDefault(); }
-
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({
+            "form-name": form.getAttribute("name"),
+            ...this.state,
+          }),
+        })
+          .catch((error) => alert(error));
+      };
     render() {
         return (
             <div id="submission">
                 <p id="intro">{this.props.intro}</p>
 
-                <form name="form" method="post" id="text-fields" onSubmit={this.dontEnter} data-netlify="true" data-netlify-honeypot="bot-field">
+                <form name="form" method="post" id="text-fields" onSubmit={this.handleSubmit} data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="bot-field" />
                     <input type="hidden" name="form-name" value="form"/>
                     <p hidden>
