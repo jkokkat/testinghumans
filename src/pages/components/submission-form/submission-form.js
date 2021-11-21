@@ -81,6 +81,7 @@ export default class SubmissionForm extends Component {
 
     dontEnter(e) { e.preventDefault(); }
     handleSubmit = (e) => {
+        this.dontEnter;
         e.preventDefault();
         const form = e.target;
         fetch("/", {
