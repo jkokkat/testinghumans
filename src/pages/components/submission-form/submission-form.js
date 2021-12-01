@@ -99,7 +99,7 @@ export default class SubmissionForm extends Component {
             <div id="submission">
                 <p id="intro">{this.props.intro}</p>
 
-                <form name="form" method="post" id="text-fields" onSubmit={this.handleSubmit} data-netlify="true" netlify-honeypot="bot-field">
+                <form name="form-name" method="post" id="text-fields" onSubmit={this.handleSubmit} data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="bot-field" />
                     <input type="hidden" name="form-name" value="form"/>
                     <p hidden>
