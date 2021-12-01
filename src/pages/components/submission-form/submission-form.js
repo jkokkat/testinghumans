@@ -88,6 +88,9 @@ export default class SubmissionForm extends Component {
     //handleSubmit = (e) => {
     handleSubmit = async(e) =>{
        e.preventDefault();
+       if (e.length>0){
+           return false;
+       }
        const form = e.target;
         
         fetch("/", {
