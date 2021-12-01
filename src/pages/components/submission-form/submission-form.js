@@ -29,7 +29,7 @@ export default class SubmissionForm extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.onClickSubmit = this.onClickSubmit.bind(this)
     }
-    onClickSubmit(){
+    onClickSubmit(e){
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.setState({
             errors:{
@@ -41,6 +41,18 @@ export default class SubmissionForm extends Component {
 
         }});
         console.log(this.state.errors)
+        const form = e.target;
+        
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({
+            "form-name": form.getAttribute("name"),
+            ...this.state,
+          }),
+        })
+         
+          .catch((error) => alert(error));
     }
     handleChange(event) {
         const { name, value, type, checked } = event.target
@@ -81,18 +93,6 @@ export default class SubmissionForm extends Component {
 
     dontEnter(e) { 
         e.preventDefault(); 
-        const form = e.target;
-        
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({
-            "form-name": form.getAttribute("name"),
-            ...this.state,
-          }),
-        })
-         
-          .catch((error) => alert(error));
           //this.dontEnter();
          // e.preventDefault();
     }
