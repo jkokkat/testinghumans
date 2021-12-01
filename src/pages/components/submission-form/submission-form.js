@@ -86,8 +86,8 @@ export default class SubmissionForm extends Component {
          // e.preventDefault();
     } */
     //handleSubmit = (e) => {
-    handleSubmit =  (e) =>{
-       //e.preventDefault();
+    handleSubmit = async(e) =>{
+       e.preventDefault();
        const form = e.target;
         
         fetch("/", {
@@ -101,7 +101,7 @@ export default class SubmissionForm extends Component {
          
           .catch((error) => alert(error));
           //this.dontEnter();
-          e.preventDefault(); 
+         // e.preventDefault(); 
     }
         /* const form = e.target;
         
