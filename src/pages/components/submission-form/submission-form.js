@@ -81,9 +81,8 @@ export default class SubmissionForm extends Component {
 
     dontEnter(e) { e.preventDefault(); }
     handleSubmit = (e) => {
-        //this.dontEnter;
-        e.preventDefault();
         const form = e.target;
+        
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -92,7 +91,10 @@ export default class SubmissionForm extends Component {
             ...this.state,
           }),
         })
+         
           .catch((error) => alert(error));
+          //this.dontEnter();
+          e.preventDefault();
       };
     render() {
         return (
