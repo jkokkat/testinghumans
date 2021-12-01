@@ -29,7 +29,7 @@ export default class SubmissionForm extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.onClickSubmit = this.onClickSubmit.bind(this)
     }
-    onClickSubmit(e){
+    onClickSubmit(){
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.setState({
             errors:{
@@ -41,18 +41,6 @@ export default class SubmissionForm extends Component {
 
         }});
         console.log(this.state.errors)
-        const form = e.target;
-        
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({
-            "form-name": form.getAttribute("name"),
-            ...this.state,
-          }),
-        })
-         
-          .catch((error) => alert(error));
     }
     handleChange(event) {
         const { name, value, type, checked } = event.target
@@ -89,14 +77,32 @@ export default class SubmissionForm extends Component {
             this.setState({errors,[name]:value}, () => {
                 console.log(errors)
             })
+            
         }
 
-    dontEnter(e) { 
+    /* dontEnter(e) { 
         e.preventDefault(); 
           //this.dontEnter();
          // e.preventDefault();
+    } */
+    //handleSubmit = (e) => {
+    handleSubmit =  (e) =>{
+       //e.preventDefault();
+       const form = e.target;
+        
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({
+            "form-name": form.getAttribute("name"),
+            ...this.state,
+          }),
+        })
+         
+          .catch((error) => alert(error));
+          //this.dontEnter();
+          e.preventDefault(); 
     }
-    handleSubmit = (e) => {
         /* const form = e.target;
         
         fetch("/", {
@@ -111,13 +117,13 @@ export default class SubmissionForm extends Component {
           .catch((error) => alert(error));
           //this.dontEnter();
           e.preventDefault(); */
-      };
+     // };
     render() {
         return (
             <div id="submission">
                 <p id="intro">{this.props.intro}</p>
 
-                <form name={this.props.form_name} method="post" id="text-fields" onSubmit={this.dontEnter} data-netlify="true" netlify-honeypot="bot-field">
+                <form name={this.props.form_name} method="post" id="text-fields" onSubmit={this.handleSubmit} data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="bot-field" />
                     <input type="hidden" name="form-name" value="form"/>
                     <p hidden>
