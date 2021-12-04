@@ -151,7 +151,7 @@ export default class SubmissionForm extends Component {
                         name="firstName"
                         input type="text"
                         value={this.state.firstName}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange} required
                     />
                     <div style ={{fontSize:11, color:"red"}}>{this.state.errors.firstNameError}</div>
                     <br style={{ lineHeight: "2" }} />
@@ -162,7 +162,7 @@ export default class SubmissionForm extends Component {
                         name="lastName"
                         input type="text"
                         value={this.state.lastName}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange} required
                     />
                     <div style ={{fontSize:11, color:"red"}}>{this.state.errors.lastNameError}</div>
                     <br style={{ lineHeight: "2" }} />
@@ -173,7 +173,7 @@ export default class SubmissionForm extends Component {
                         name="email"
                         input type="email"
                         value={this.state.email}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange} required
                     />
                     <div style ={{fontSize:11, color:"red"}}>{this.state.errors.emailError}</div>
                     <br style={{ lineHeight: "2" }} />
@@ -185,7 +185,7 @@ export default class SubmissionForm extends Component {
                         name="description"
                         input type="text"
                         value={this.state.descripton}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange} required
                     />
                     <div style ={{fontSize:11, color:"red"}}>{this.state.errors.descriptionError}</div>
                     <br style={{ lineHeight: "2" }} />
@@ -196,7 +196,7 @@ export default class SubmissionForm extends Component {
                             id="can-contact-checkbox"
                             name="canContact"
                             onChange={this.handleChange}
-                            checked={this.state.canContact}
+                            checked={this.state.canContact} required
                         />
                         <label id="consent" for="can-contact-checkbox">I understand that this form is storing my submitted information so I can be contacted.</label>
                     </li>
